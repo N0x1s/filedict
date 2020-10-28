@@ -48,7 +48,7 @@ class FileDict(MutableMapping):
     def __init__(self, dirname, pairs=(), *,
                  agressive=True, hidden=False, cached=True, **kwargs):
         """
-        Constructs all the necessary attributes for the person object.
+        Constructs all the necessary attributes for the FileDict object.
 
         Parameters
         ----------
