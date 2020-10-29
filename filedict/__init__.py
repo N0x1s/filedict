@@ -13,6 +13,7 @@ Misc variables:
 """
 from collections.abc import MutableMapping
 from contextlib import suppress
+import pathlib
 import shutil
 import pickle
 import os
@@ -28,8 +29,8 @@ class FileDict(MutableMapping):
 
     Attributes
     ----------
-    dirname : str
-        dir name that gonna be used to store data
+    dirname : pathlib.Path
+        dir that gonna be used to store data
 
     _agressive : bool
         if set to True every dict gonna be treated as FileDict even the once
@@ -73,7 +74,10 @@ class FileDict(MutableMapping):
 
 
         """
-        self.dirname = f'.{dirname}' if hidden and dirname[0] != '.' else dirname
+        self.dirname = pathlib.Path(dirname)
+        if hidden and self.dirname.name[0] != '.':
+            self.dirname = pathlib.Path(os.path.join(self.dirname.parent,
+                                                     f'.{self.dirname.name}'))
         self._agressive = agressive
         self.cached = cached
         with suppress(FileExistsError):
