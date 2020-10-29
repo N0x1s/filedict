@@ -50,7 +50,7 @@ class TestFileDict(unittest.TestCase):
         tmpdict = FileDict(tempfile.mkdtemp(), **self.testdict)
         tmpdict1 = FileDict(tempfile.mkdtemp(), agressive=False)
         subdict = os.path.join(tmpdict.dirname, '1')
-        subdict1 = os.path.join(tmpdict.dirname, '1')
+        subdict1 = os.path.join(tmpdict1.dirname, '1')
 
         self.assertTrue(os.path.exists(subdict) and os.path.isdir(subdict))
         self.assertFalse(os.path.exists(subdict1) and os.path.isdir(subdict1))
